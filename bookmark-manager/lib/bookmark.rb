@@ -1,5 +1,20 @@
+require 'pg'
+
 class Bookmark
+  def self.select_env
+    if ENV['ENVIRONMENT'] == 'test'
+      @connection = PG.connect(dbname: 'bookmark_manager_test')
+    else
+      @connection = PG.connect(dbname: 'bookmark_manager')
+    end
+  end
   def self.all
-    ['http://www.google.com', 'http://www.yahoo.com']
+    select_env
+    result = @connection.exec("SELECT * FROM bookmarks")
+    result.map { |bookmark| bookmark['url'] }
+  end
+  def self.create(url:)
+    select_env
+    @connection.exec("INSERT INTO bookmarks (url) VALUES ('#{url}');")
   end
 end
