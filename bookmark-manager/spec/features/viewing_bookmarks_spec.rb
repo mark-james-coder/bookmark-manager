@@ -1,11 +1,11 @@
 require 'pg'
 
-feature 'Viewing the index page' do
-  scenario 'visiting the index page' do
-    visit('/')
-    expect(page).to have_content "Bookmark Manager"
-  end
-end
+# feature 'Viewing the index page' do
+#   scenario 'visiting the index page' do
+#     visit('/')
+#     expect(page).to have_content "Bookmark Manager"
+#   end
+# end
 
 feature 'Viewing bookmarks' do
   scenario 'A user can see bookmarks' do
@@ -13,7 +13,7 @@ feature 'Viewing bookmarks' do
     Bookmark.create(url: 'http://www.destroyallsoftware.com', title: 'Destroy All Software')
     Bookmark.create(url: 'http://www.google.com', title: 'Google')
 
-    visit '/bookmarks'
+    visit '/bookmarks/index'
 
     expect(page).to have_link('Makers Academy', href: 'http://www.makersacademy.com')
     expect(page).to have_link('Destroy All Software',  href: 'http://www.destroyallsoftware.com')

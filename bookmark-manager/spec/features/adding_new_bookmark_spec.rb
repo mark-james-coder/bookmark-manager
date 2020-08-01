@@ -2,7 +2,7 @@ require 'pg'
 
 feature 'Adding a new bookmark' do
   scenario 'A user can add a bookmark to Bookmark Manager' do
-    visit('/add')
+    visit('/bookmarks/create')
     fill_in('url', with: 'http://www.testbookmark.com')
     fill_in('title', with: 'Test Bookmark')
     click_button('Add')
