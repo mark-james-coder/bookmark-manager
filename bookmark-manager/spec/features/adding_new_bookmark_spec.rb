@@ -9,14 +9,12 @@ feature 'Adding a new bookmark' do
 
     expect(page).to have_link('Test Bookmark', href: 'http://www.testbookmark.com')
   end
+  scenario 'The bookmark must be a valid URL' do
+    visit('/bookmarks/create')
+    fill_in('url', with: 'not a real bookmark')
+    click_button('Add')
+
+    expect(page).not_to have_content "not a real bookmark"
+    expect(page).to have_content "You must submit a valid URL."
+  end
 end
-
-
-# feature 'adding a new bookmark' do
-#   scenario 'add a new bookmark' do
-#     visit('/add')
-#     fill_in('url', with: 'http://www.bbc.com')
-#     click_button 'Add'
-#     expect(page).to have_content "http://www.bbc.com"
-#   end
-# end
